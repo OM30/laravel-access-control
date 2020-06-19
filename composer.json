@@ -1,0 +1,36 @@
+{
+    "name": "pierresilva/laravel-access-control",
+    "description": "Laravel 7 Roles and Permissions",
+    "keywords": ["acl", "roles", "permissions", "auth", "laravel", "pierresilva"],
+    "type": "package",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Pierre Silva",
+            "email": "pierremichelsilva@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=7.2.5",
+        "illuminate/database": "7.*",
+        "illuminate/support": "7.*",
+        "illuminate/filesystem": "7.*",
+        "illuminate/config": "7.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "pierresilva\\AccessControl\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "pierresilva\\AccessControl\\AccessControlServiceProvider"
+            ],
+            "aliases": {
+                "AccessControl": "pierresilva\\AccessControl\\Facades\\AccessControl"
+            }
+        }
+    }
+}
