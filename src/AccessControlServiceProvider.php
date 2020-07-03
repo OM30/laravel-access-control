@@ -36,6 +36,8 @@ class AccessControlServiceProvider extends ServiceProvider
             }
         }
 
+        include __DIR__.'/Routes/api.php';
+
         $this->registerBladeDirectives();
     }
 
@@ -55,6 +57,9 @@ class AccessControlServiceProvider extends ServiceProvider
 
             return new \pierresilva\AccessControl\AccessControl($auth);
         });
+
+        $this->app->make('pierresilva\AccessControl\Controllers\PermissionsController');
+        $this->app->make('pierresilva\AccessControl\Controllers\RolesController');
     }
 
     /**
