@@ -138,7 +138,7 @@ class PermissionsController extends Controller
     public function destroy(string $permissionSlug)
     {
         //
-        $permission = Permission::with('permissions')->where('slug', $permissionSlug)->firstOrFail();
+        $permission = Permission::where('slug', $permissionSlug)->firstOrFail();
 
         $permission->delete();
 

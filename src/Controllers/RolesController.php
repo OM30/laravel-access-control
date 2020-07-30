@@ -124,6 +124,14 @@ class RolesController extends Controller
 
         $role->update($request->all());
 
+        if ($request->get('permissions') && is_array($request->get('permissions'))) {
+            foreach ($request->get('permissions') as $permission) {
+                if (isset($permission['id'])){
+                    $role->assignPermission($permission['id']);
+                }
+            }
+        }
+
         return response()->json([
             'message' => 'Role updated',
             'data' => [
@@ -131,12 +139,6 @@ class RolesController extends Controller
                 'permissions' => $role->getPermissions()
             ]
         ]);
-
-        $role = null;
-        if ($request->get('role')) {
-            $role = Role::where('slug', $request->get('role'))->firstOrFail();
-            $permission->assignRole($role->id);
-        }
 
     }
 
@@ -164,5 +166,23 @@ class RolesController extends Controller
             ]
         ]);
 
+    }
+
+    /**
+     * @param $roleId
+     * @param $permissionId
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function assignPermission($roleId, $permissionId)
+    {
+        $role = Role::where('slug', $roleId)->firstOrFail();
+        $role->assignPermission($permissionId);
+
+        return response()->json([
+            'message' => 'Permission assigned to role',
+            'data' => [
+                'role' => $role,
+            ]
+        ]);
     }
 }

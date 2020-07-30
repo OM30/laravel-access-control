@@ -51,9 +51,13 @@ AccessControl provides middleware that you may assign to specific routes in your
 
 AccessControl provides a facade to check user roles and permissions.
 
-#### Check user role
+#### Check user has a role
 
 `\AccessControl::userIs('role.slug')`
+
+#### Check user has any of given roles
+
+`\AccessControl::userIs(['role.slug.1', 'role.slug.2'])`
 
 #### Check user if user has a permission
 

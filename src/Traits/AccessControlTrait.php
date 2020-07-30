@@ -58,9 +58,21 @@ trait AccessControlTrait
     {
         $slug = strtolower($slug);
 
-        foreach ($this->roles as $role) {
-            if ($role->slug == $slug) {
-                return true;
+        if (is_array($slug)) {
+            foreach ($slug as $sg) {
+                foreach ($this->roles as $role) {
+                    if ($role->slug == $sg) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        if (is_string($slug)) {
+            foreach ($this->roles as $role) {
+                if ($role->slug == $slug) {
+                    return true;
+                }
             }
         }
 
