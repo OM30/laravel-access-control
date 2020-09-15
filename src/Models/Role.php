@@ -26,6 +26,13 @@ class Role extends Model
      */
     protected $table = 'roles';
 
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+
+        $this->setConnection(env('DB_DYNAMIC') ? 'dynamic' : env('DB_CONNECTION'));
+    }
+
     /**
      * The sentinel cache tag used by the model.
      *
@@ -39,7 +46,7 @@ class Role extends Model
     /**
      * Roles can belong to many users.
      *
-     * @return Model
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function users()
     {

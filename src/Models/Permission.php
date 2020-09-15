@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Permission extends Model
 {
+
     /**
      * The attributes that are fillable via mass assignment.
      *
@@ -19,6 +20,13 @@ class Permission extends Model
      * @var string
      */
     protected $table = 'permissions';
+
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+
+        $this->setConnection(env('DB_DYNAMIC') ? 'dynamic' : env('DB_CONNECTION'));
+    }
 
     /**
      * Permissions can belong to many roles.
